@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.Objects;
 
-public class Warrior extends BaseClass{
+public class Warrior extends BaseClass {
     private int shieldStrength;
 
     public Warrior(String name) {

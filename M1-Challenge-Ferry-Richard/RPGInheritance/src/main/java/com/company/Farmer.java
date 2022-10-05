@@ -48,7 +48,6 @@ public class Farmer extends BaseClass {
                 ", arrested=" + this.isArrested() +
                 ", plowing=" + plowing +
                 ", harvesting=" + harvesting +
-
                 '}';
     }
 

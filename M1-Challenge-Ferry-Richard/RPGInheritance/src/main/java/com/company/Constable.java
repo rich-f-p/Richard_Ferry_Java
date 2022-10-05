@@ -33,7 +33,15 @@ public class Constable extends BaseClass{
     @Override
     public String toString() {
         return "Constable{" +
-                "jurisdiction='" + jurisdiction + '\'' +
+                "name='" + this.getName() + '\'' +
+                ", strength=" + this.getStrength() +
+                ", health=" + this.getHealth() +
+                ", stamina=" + this.getStamina() +
+                ", speed=" + this.getSpeed() +
+                ", attackPower=" + this.getAttackPower() +
+                ", running=" + this.isRunning() +
+                ", arrested=" + this.isArrested() +
+                ", jurisdiction='" + jurisdiction + '\'' +
                 '}';
     }
 

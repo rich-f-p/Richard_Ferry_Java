@@ -12,17 +12,16 @@ public class BaseClass {
     private boolean running;
     private boolean arrested;
 
-    public void attackAnotherCharacter(BaseClass character){
-        System.out.println(name+": is attacking "+character.getName());
-        System.out.println(name+": Attack: "+attackPower);
-        stamina-=3;
-        character.setHealth(character.getHealth()-attackPower);
-        if(character.getHealth()<=0){
-            System.out.println(name+": defeated "+ character.getName());
+    public void attackAnotherCharacter(BaseClass character) {
+        System.out.println(name + ": is attacking " + character.getName());
+        System.out.println(name + ": Attack: " + attackPower);
+        stamina -= 3;
+        character.setHealth(character.getHealth() - attackPower);
+        if (character.getHealth() <= 0) {
+            System.out.println(name + ": defeated " + character.getName());
         }
-        System.out.println("Stamina remaining: "+stamina);
+        System.out.println("Stamina remaining: " + stamina);
     }
-
 
 
     public String getName() {
