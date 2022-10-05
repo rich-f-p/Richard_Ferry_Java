@@ -1,6 +1,8 @@
 package com.company;
 
-public class Farmer extends BaseClass{
+import java.util.Objects;
+
+public class Farmer extends BaseClass {
     private boolean plowing;
     private boolean harvesting;
 
@@ -48,5 +50,19 @@ public class Farmer extends BaseClass{
                 ", harvesting=" + harvesting +
 
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Farmer farmer = (Farmer) o;
+        return plowing == farmer.plowing && harvesting == farmer.harvesting;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), plowing, harvesting);
     }
 }
