@@ -1,4 +1,4 @@
-# Richard_Ferry_Java    [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# M1-Challenge-Ferry-Richard [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 The following is a file containing challenge one, which included exercise 1 : Converter Interface, exercise 2 : Calculate Object, exercise 3 : Ice Cream Design, exercise 4 : RPGInheritance, and exercise 5 : Customer Composition.
 
 # Table of Contents
