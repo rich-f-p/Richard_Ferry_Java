@@ -44,4 +44,15 @@ public class WarriorTest {
         assertEquals(94, warrior1.getStamina());
     }
 
+    @Test
+    public void shouldReturnIfTheAttackedCharacterIsDefeatedOrNot(){
+        String actual = warrior1.attackAnotherCharacter(warrior2);
+        String expected = warrior2.getName()+" health remaining: "+warrior2.getHealth();
+        assertEquals(expected,actual);
+        warrior2.setHealth(10);
+        actual = warrior1.attackAnotherCharacter(warrior2);
+        expected = "defeated "+warrior2.getName();
+        assertEquals(expected,actual);
+    }
+
 }

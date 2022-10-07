@@ -30,6 +30,7 @@ public class ConstableTest {
 
     @Test
     public void shouldReturnABooleanIndicatingIfArrestAnotherCharacterSetsArrestedToTrue(){
+        assertEquals(false,constable2.isArrested());
         constable1.arrestAnotherCharacter(constable2);
         assertEquals(true,constable2.isArrested());
     }
@@ -48,5 +49,16 @@ public class ConstableTest {
         assertEquals(57, constable1.getStamina());
         constable1.attackAnotherCharacter(constable2);
         assertEquals(54, constable1.getStamina());
+    }
+
+    @Test
+    public void shouldReturnIfTheAttackedCharacterIsDefeatedOrNot(){
+    String actual = constable1.attackAnotherCharacter(constable2);
+    String expected = constable2.getName()+" health remaining: "+constable2.getHealth();
+    assertEquals(expected,actual);
+    constable2.setHealth(5);
+    actual = constable1.attackAnotherCharacter(constable2);
+    expected = "defeated "+constable2.getName();
+    assertEquals(expected,actual);
     }
 }

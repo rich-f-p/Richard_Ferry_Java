@@ -45,4 +45,15 @@ public class FarmerTest {
         farmer1.attackAnotherCharacter(farmer2);
         assertEquals(69,farmer1.getStamina());
     }
+
+    @Test
+    public void shouldReturnIfTheAttackedCharacterIsDefeatedOrNot(){
+        String actual = farmer1.attackAnotherCharacter(farmer2);
+        String expected = farmer2.getName()+" health remaining: "+farmer2.getHealth();
+        assertEquals(expected,actual);
+        farmer2.setHealth(1);
+        actual = farmer1.attackAnotherCharacter(farmer2);
+        expected = "defeated "+farmer2.getName();
+        assertEquals(expected,actual);
+    }
 }
