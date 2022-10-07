@@ -12,6 +12,6 @@ public class App {
         System.out.println("3.4+2.3= "+cal.add(3.4,2.3));
         System.out.println("6.7*4.4= "+cal.multiply(6.7,4.4));
         System.out.println("5.5-0.5= "+cal.subtract(5.5,0.5));
-        System.out.println("10.9/2.2= "+cal.divide(10.8,2.2));
+        System.out.println("10.8/2.2= "+cal.divide(10.8,2.2));
     }
 }
