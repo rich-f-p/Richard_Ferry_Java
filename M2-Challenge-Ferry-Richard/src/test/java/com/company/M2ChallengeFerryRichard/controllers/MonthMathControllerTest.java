@@ -14,6 +14,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -57,16 +60,12 @@ public class MonthMathControllerTest {
     @Test
     public void shouldThrowAn422ErrorWhenGivenNumberOutOfRange() throws Exception {
         //below range 1-12
-        month = new Month(0);
-        String monthJson = mapper.writeValueAsString(month);
         mockMvc.perform(get("/month/{monthNumber}",0))
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity());
 
         //above range 1-12
-        month = new Month(13);
-        monthJson = mapper.writeValueAsString(month);
-        mockMvc.perform(get("/month/{monthNumber}",0))
+        mockMvc.perform(get("/month/{monthNumber}",13))
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity());
     }
@@ -92,6 +91,20 @@ public class MonthMathControllerTest {
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(content().json(outputJson));
+    }
+
+    @Test
+    public void shouldThrow422ErrorIfOneOfTheOperandsIncludeAStringForAdd() throws Exception {
+        Map<String,String> inputMap = new HashMap<>();
+        inputMap.put("operand1","2");
+        inputMap.put("operand2","add");
+        String inputJson = mapper.writeValueAsString(inputMap);
+
+        mockMvc.perform(post("/add")
+                    .content(inputJson)
+                    .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
     }
 
     @Test
@@ -150,6 +163,20 @@ public class MonthMathControllerTest {
     }
 
     @Test
+    public void shouldThrow422ErrorIfOneOfTheOperandsIncludeAStringForSubtract() throws Exception {
+        Map<String,String> inputMap = new HashMap<>();
+        inputMap.put("operand1","2");
+        inputMap.put("operand2","subtract");
+        String inputJson = mapper.writeValueAsString(inputMap);
+
+        mockMvc.perform(post("/subtract")
+                        .content(inputJson)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
     public void shouldReturnTheDividedResultOfTheOperands() throws Exception {
         inputMath = new MathSolution();
         inputMath.setOperand1(4);
@@ -173,17 +200,45 @@ public class MonthMathControllerTest {
     }
 
     @Test
-    public void shouldThrowErrorIfOperandsAreNotValidIntegersForDivide() throws Exception {
+    public void shouldThrow422ErrorIfOperandsAreNotValidIntegersForDivide() throws Exception {
         inputMath = new MathSolution();
         inputMath.setOperand1(null);
         inputMath.setOperand2(2);
-        inputMath.setOperation("subtract");
+        inputMath.setOperation("divide");
         String inputJson = mapper.writeValueAsString(inputMath);
 
-        mockMvc.perform(post("/subtract")
+        mockMvc.perform(post("/divide")
                         .content(inputJson)
                         .contentType(MediaType.APPLICATION_JSON)
                 )
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    public void shouldThrow422ErrorIfSecondOperandIsEqualToZeroForDivide() throws Exception{
+        inputMath = new MathSolution();
+        inputMath.setOperand1(10);
+        inputMath.setOperand2(0);
+        inputMath.setOperation("divide");
+        String inputJson = mapper.writeValueAsString(inputMath);
+
+        mockMvc.perform(post("/divide")
+                        .content(inputJson)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+    }
+    @Test
+    public void shouldThrow422ErrorIfOneOfTheOperandsIncludeAStringForDivide() throws Exception {
+        Map<String,String> inputMap = new HashMap<>();
+        inputMap.put("operand1","2");
+        inputMap.put("operand2","divide");
+        String inputJson = mapper.writeValueAsString(inputMap);
+
+        mockMvc.perform(post("/divide")
+                        .content(inputJson)
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity());
     }
@@ -212,14 +267,28 @@ public class MonthMathControllerTest {
     }
 
     @Test
+    public void shouldThrow422ErrorIfOneOfTheOperandsIncludeAStringForMultiply() throws Exception {
+        Map<String,String> inputMap = new HashMap<>();
+        inputMap.put("operand1","2");
+        inputMap.put("operand2","multiply");
+        String inputJson = mapper.writeValueAsString(inputMap);
+
+        mockMvc.perform(post("/multiply")
+                        .content(inputJson)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
     public void shouldThrowErrorIfOperandsAreNotValidIntegersForMultiply() throws Exception {
         inputMath = new MathSolution();
         inputMath.setOperand1(null);
         inputMath.setOperand2(2);
-        inputMath.setOperation("subtract");
+        inputMath.setOperation("multiply");
         String inputJson = mapper.writeValueAsString(inputMath);
 
-        mockMvc.perform(post("/subtract")
+        mockMvc.perform(post("/multiply")
                         .content(inputJson)
                         .contentType(MediaType.APPLICATION_JSON)
                 )
